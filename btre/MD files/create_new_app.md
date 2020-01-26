@@ -72,7 +72,7 @@ other apps.
 * Create a new subfolder inside it, with the name of your new app.
 * Create your .html files in there.
 
->  **Get sure you load static, extend from base template, and use block content!** 
+#### **Get sure you load static, extend from base template, and use block content!** 
 Example:
 ```html
 {% extends 'base.html'%}
