@@ -27,7 +27,7 @@ That'll create a folder, that will be used in deployment.
 
 ## Referencing statif files inside templates
 
-* Put in the beiginning ```python {% load static%}```
+* Put in the beginning :```{% load static%}```
 * Whenever you use a an image, js,css, use the following structure( subfolder-Inside-staticFolder/asset):
 ```html
  <img src="{% static 'img/about.jpg' %}" alt="">
