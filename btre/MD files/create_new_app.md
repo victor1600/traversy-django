@@ -35,8 +35,9 @@ urlpatterns = [
 
 #### Link the app to main URLS.py
 
-Create an ew entry in urls.py. Specifiy the path, and then use
+Create an entry in urls.py. Specifiy the path, and then use
 include method to link to newapp.urls(in other words, other app's urls.py):
+> Inside urls.py you can use view.method or link to an url of another file.
 
 ```python
 from django.contrib import admin
