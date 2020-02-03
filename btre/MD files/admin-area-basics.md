@@ -2,7 +2,9 @@
 
 If you want to see available options for python manage.py:
 
-```python3 manage.py help```
+```shell script
+
+python3  manage.py help```
 
 * Create a superuser.
 
