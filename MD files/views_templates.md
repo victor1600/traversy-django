@@ -47,7 +47,7 @@ def index(request):
 ```
 
 
-## Receive data in template
+## Accessing data in template
 
 * Example:
 ```html
@@ -142,6 +142,7 @@ returns the name of the realtor.
                       <hr>
                       <div class="row py-2 text-secondary">
                         <div class="col-12">
+
                           <i class="fas fa-user"></i> {{ list.realtor }}</div>
                       </div>
                       <div class="row text-secondary pb-2">
@@ -169,8 +170,29 @@ returns the name of the realtor.
 
 * Notice in the code above in the ```<a>``` we see the syntax to send
  an argument to other view.
+
+
+
+### Receiving parameters in view
+
+* Angle brackets
+* Parameter's type
+* Name
+
+```python
+from django.urls import path
+from . import views
+
+
+urlpatterns = [
+    path('',views.index, name='listings'),
+    path('<int:listing_id>',views.listing, name='listing'),
+    path('search',views.search, name='search')
+]
+```
+
 * The listing method which we invoke, has to have as one of it's
-argument, the expected value that will recieve from the other template:
+argument, the expected value that will receive:
 
 ```python
 def listing(request, listing_id):

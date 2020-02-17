@@ -25,7 +25,7 @@ python3 manage.py collectstatic
 
 That'll create a folder, that will be used in deployment.
 
-## Referencing statif files inside templates
+## Referencing static files inside templates
 
 * Put in the beginning :```{% load static%}```
 * Whenever you use a an image, js,css, use the following structure( subfolder-Inside-staticFolder/asset):
