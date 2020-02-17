@@ -1,4 +1,4 @@
-# Admin area
+# Admin area Basics
 
 If you want to see available options for python manage.py:
 

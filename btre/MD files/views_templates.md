@@ -1,34 +1,107 @@
+# Views
 
-{% extends 'base.html' %}
+We have to define a method, that a route inside urls.py expects to find.
+
+* All methods will have a request parameter.
+* Most of the time, they'll return a rendered template
+
+Without sending parameters to template:
+
+```python
+from django.shortcuts import render
+from django.http import HttpResponse
+
+# Create your views here.
+def index(request):
+    return render(request,"pages/index.html")
+
+def about(request):
+    return render(request,"pages/about.html")
+
+```
+
+Let's take a look to urls.py:
+
+```python
+from django.urls import path
+from . import views
+
+
+urlpatterns = [
+    path('',views.index, name='index'),
+    path('about',views.about, name='about')
+]
+```
+
+Notice the syntax ```views.methodName```
+
+## Pass data to template
+
+* We do that with a dictionary
+
+```python
+def index(request):
+    return render(request, 'listings/listings.html', {
+        'name': 'Brad'
+    })
+```
+
+
+## Receive data in template
+
+* Example:
+```html
+  <h1 class="display-4"> Browser our Properties {{ name }}</h1>
+```
+
+
+## Fetch data from DB and send it to template
+
+* Put everything in 'context' dictionary
+* send context argument to render method.
+
+```python
+def index(request):
+    listings = Listing.objects.all()
+
+    context = {
+        'listings': listings
+    }
+
+    print(listings)
+
+    return render(request, 'listings/listings.html',context)
+```
+
+## Show data retrieved from db in template
+
+* Loop through the objects:
+
+### Using humanize
+
+* Go to main settings.py and add the following at the onf INSTALLED_APPS
+array:
+
+```python
+'django.contrib.humanize'
+```
+* Go to the top of listings html and add the following after
+ ```{% extends 'base.html' %}```:
+
+````python
 {% load humanize %}
+````
 
 
-{% block content %}
-<section id ='showcase-inner' class="py-5 text-white">
-    <div class="container">
-        <div class="row text-center">
-            <div class="col-md-12">
-                <h1 class="display-4"> Browser our Properties {{ name }}</h1>
-                <p1 class="lead">Lorem ipsum dolor sit, amet consectetur!</p1>
-            </div>
-        </div>
-    </div>
-</section>
+**notice**:
 
-  <!-- Breadcrumb -->
-  <section id="bc" class="mt-3">
-    <div class="container">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item">
-            <a href="{% url 'index' %}">
-              <i class="fas fa-home"></i> Home</a>
-          </li>
-          <li class="breadcrumb-item active"> Browse Listings</li>
-        </ol>
-      </nav>
-    </div>
-  </section>
+* Use of humanize intcomma to display the comma in prices, and humanize
+time since, to get time in human mode.
+* Use of .url attribute of the image attribute of our listing.
+* when using listing.realtor, the __str__method will get invoked, which
+returns the name of the realtor.
+
+```html
 
   <!-- Listings -->
   <section id="listings" class="py-4">
@@ -90,29 +163,17 @@
           {% endif %}
 
       </div>
+```
 
-      <div class="row">
-        <div class="col-md-12">
-          <ul class="pagination">
-            <li class="page-item disabled">
-              <a class="page-link" href="#">&laquo;</a>
-            </li>
-            <li class="page-item active">
-              <a class="page-link" href="#">1</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#">2</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#">3</a>
-            </li>
-            <li class="page-item">
-              <a class="page-link" href="#">&raquo;</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
+### Sending a parameter from one template to another
 
-{% endblock %}
+* Notice in the code above in the ```<a>``` we see the syntax to send
+ an argument to other view.
+* The listing method which we invoke, has to have as one of it's
+argument, the expected value that will recieve from the other template:
+
+```python
+def listing(request, listing_id):
+    return render(request, 'listings/listing.html')
+
+```

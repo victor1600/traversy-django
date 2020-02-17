@@ -9,7 +9,7 @@ Under every app, there is a file named models.py, you can specify things like:
 * Foreing keys
 * images:use model.ImageField(). There is a media folder, Everything we upload will go to that media folder. We set the location inside the media folder we want our images to go to.
 * WE CANT SPECIFY THE DEFAULT FIELD WE WANT TO SHOW IN OUR ADMIN AREA USING THE STR METHOD
-
+* str method will be helpfull in admin area, what do we want to display about the object?
 example:
 
 ```python
