@@ -199,3 +199,5 @@ def listing(request, listing_id):
     return render(request, 'listings/listing.html')
 
 ```
+
+## Pagination 
